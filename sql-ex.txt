@@ -39,3 +39,29 @@ WHERE (cd = '12x' OR cd = '24x') AND price < 600
 __________________________________________________________________________________
 
 Задание: 6
+Для каждого производителя, выпускающего ПК-блокноты c объёмом жесткого диска не менее 10 Гбайт, найти скорости таких ПК-блокнотов. Вывод: производитель, скорость.
+
+SELECT DISTINCT Product.maker, Laptop.speed
+FROM Product
+JOIN Laptop ON Product.model=Laptop.model
+WHERE Laptop.hd >= 10
+__________________________________________________________________________________
+
+Задание: 7
+Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
+
+SELECT product.model, pc.price
+FROM pc JOIN product ON pc.model=product.model
+WHERE maker='B'
+UNION
+SELECT product.model, laptop.price
+FROM laptop JOIN product ON laptop.model=product.model
+WHERE maker='B'
+UNION
+SELECT product.model, printer.price
+FROM printer JOIN product ON printer.model=product.model
+WHERE maker='B'
+__________________________________________________________________________________
+
+Задание: 8
+

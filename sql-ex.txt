@@ -136,21 +136,27 @@ HAVING COUNT(hd) > 1
 __________________________________________________________________________________
 
 Задание: 16
+Найдите пары моделей PC, имеющих одинаковые скорость и RAM. В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
 
-SELECT DISTINCT P.model, L.model, P.speed, P.ram
-FROM PC P
-JOIN
-(SELECT speed, ram
-FROM pc
-GROUP BY speed, ram
-HAVING COUNT(*)=2)
-S ON P.speed = S.speed AND P.ram = S.ram 
-JOIN 
-PC L ON L.speed = S.speed 
-AND  L.ram = S.ram 
-AND  L.model < P.model
+SELECT DISTINCT A.model AS model_1, B.model AS model_2, A.speed, A.ram
+FROM PC AS A, PC B
+WHERE A.ram = B.ram AND 
+A.speed=B.speed AND
+A.model > B.model
+__________________________________________________________________________________
 
+Задание: 17
+Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК.
+Вывести: type, model, speed
 
+SELECT DISTINCT Product.type, laptop.model, laptop.speed
+FROM Product, Laptop
+WHERE Product.type='laptop'
+and
+laptop.speed< ALL 
+(SELECT speed
+FROM PC);
+__________________________________________________________________________________
 
 
 

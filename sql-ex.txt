@@ -158,6 +158,51 @@ laptop.speed< ALL
 FROM PC);
 __________________________________________________________________________________
 
+Задание: 18
+Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price
+
+SELECT DISTINCT Product.maker, Printer.price
+FROM Product
+JOIN Printer 
+ON Product.model=Printer.model
+WHERE price =
+(SELECT MIN(price)
+FROM Printer
+WHERE color='y')
+AND color='y'
+__________________________________________________________________________________
+
+Задание: 19
+Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов.
+Вывести: maker, средний размер экрана.
+
+SELECT Product.maker, AVG(Laptop.screen)
+FROM product
+JOIN Laptop
+ON Product.model=Laptop.model
+GROUP BY Product.maker
+__________________________________________________________________________________
+
+Задание: 20
+Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
+
+SELECT maker, COUNT(model)
+FROM product
+WHERE type='pc'
+GROUP BY maker
+HAVING COUNT(model)>=3
+__________________________________________________________________________________
+Задание: 21
+Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC.
+Вывести: maker, максимальная цена.
+
+SELECT product.maker, MAX(pc.price)
+FROM product
+JOIN pc
+ON product.model=pc.model
+GROUP BY maker
+__________________________________________________________________________________
+
 
 
 
